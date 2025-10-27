@@ -129,12 +129,25 @@ function ThemeToggle() {
 }
 
 function Header() {
+  const scrollToServices = () => {
+    // If we're on the home page, just scroll to the services section
+    if (window.location.pathname === '/' || window.location.pathname === '/maphaus/') {
+      const servicesSection = document.getElementById('services')
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      // If we're on another page, navigate to home first, then scroll
+      window.location.href = '/maphaus/#services'
+    }
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/60 bg-white/70 backdrop-blur-md dark:border-neutral-800/60 dark:bg-neutral-950/60 animate-fade-in">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="text-xl font-semibold tracking-tight">MapHaus</Link>
         <nav className="hidden gap-8 text-sm md:flex">
-          <Link className="hover:opacity-80" to="/#services">Services & Pricing</Link>
+          <button onClick={scrollToServices} className="hover:opacity-80">Services & Pricing</button>
           <Link className="hover:opacity-80" to="/contact">Contact</Link>
         </nav>
         <div className="flex items-center gap-3">
@@ -167,7 +180,12 @@ function Home() {
         </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row animate-fade-in">
           <Link to="/contact" className="inline-flex items-center justify-center rounded-full bg-neutral-900 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">Request a quote</Link>
-          <Link to="/#services" className="inline-flex items-center justify-center rounded-full bg-neutral-900 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">See services</Link>
+          <button onClick={() => {
+            const servicesSection = document.getElementById('services')
+            if (servicesSection) {
+              servicesSection.scrollIntoView({ behavior: 'smooth' })
+            }
+          }} className="inline-flex items-center justify-center rounded-full bg-neutral-900 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">See services</button>
         </div>
         <div className="mt-10 grid w-full grid-cols-1 gap-6 sm:grid-cols-3 animate-fade-in">
           <Feature title="Dyno-proven" description="Validated calibrations, not guesses. We verify before delivery." />
