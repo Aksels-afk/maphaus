@@ -88,8 +88,6 @@ function useScrollAnimation() {
 }
 
 export default function App() {
-  const visibleElements = useScrollAnimation()
-  
   return (
     <ThemeProvider>
       <BrowserRouter>
