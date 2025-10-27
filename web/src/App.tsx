@@ -90,7 +90,7 @@ function useScrollAnimation() {
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/maphaus">
         <main className="min-h-dvh bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
           <Header />
           <Routes>
